@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include <fstream> // ifstream (output/read) // ofstream (input/write)
 #include <string>
@@ -21,11 +20,29 @@ void login(){
 	dataName<<age<<endl;
 	dataName.close();
 }
-void showdata(){
-	cout<<"nikmok karima";
+void Register(){
+    system("CLS");
+    string name;
+    cout<<"enter your name ==> ";
+    cin>> name;
+    cout<<endl;
+    int age;
+    cout<<"enter your age ==> ";
+    cin>> age;
+    cout<<endl;
 }
-	
-	
+void data(){
+    fstream myfile;
+    myfile.open("file.txt", ios::in);
+    if(myfile.is_open()){
+        // access line by line and storage into var type string
+        string line;
+        while(getline(myfile, line)){
+            cout<<line<<endl;
+        }
+        myfile.close();
+    }   
+}
 int main(){
     cout<<"******************************************************************************"<<endl;
     cout<<"************************** LOGIN SIGN IN SYSTEM ******************************"<<endl;
@@ -41,15 +58,15 @@ int main(){
     cin>>choise;
     switch(choise){
         case 1:
-            cout<<"LOGIN ";
             login();
+            cout<<endl;
+            main();
             break;
         case 2:
-            cout<<"REGISTER";
+            Register();
             break;
         case 3:
-            cout<<"YOUR data ";
-			showdata();
+            data();
             break;
         case 4:
             cout<<"EXIT for many taime";
@@ -59,6 +76,8 @@ int main(){
             break;
     }
 }
+
+
 
 
 
