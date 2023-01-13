@@ -3,39 +3,52 @@
 #include <string>
 #include <stdlib.h>
 using namespace std;
-void login(){
-    system("CLS");
-    string name;
-    cout<<"enter your name ==> ";
-    cin>> name;
-    cout<<endl;
-    int age;
-    cout<<"enter your age ==> ";
-    cin>> age;
-    cout<<endl;
-    cout<<name<<" "<<age;
-	ofstream dataName;
-	dataName.open("file.txt");
-	dataName<<name<<endl;
-	dataName<<age<<endl;
-	dataName.close();
-}
 void Register(){
     system("CLS");
     string name;
     cout<<"enter your name ==> ";
     cin>> name;
     cout<<endl;
-    int age;
-    cout<<"enter your age ==> ";
-    cin>> age;
+    int password;
+    cout<<"enter your password ==> ";
+    cin>> password;
     cout<<endl;
+    cout<<name<<" "<<password;
+	ofstream dataName;
+	dataName.open("file.txt");
+	dataName<<name<<endl;
+	dataName<<password<<endl;
+	dataName.close();
+}
+void Login(){
+    string id, nm; 
+    int exist, pass, ps;
+    cout<<"Enter Name ";
+    cin>>id;
+    cout<<"Enter Password ";
+    cin>>pass;
+    ifstream myfile("file.txt");
+    while(myfile>>nm>>ps){
+        if(id == nm && pass == ps){
+            exist = 1;
+        }
+    }
+    myfile.close();
+    if(exist == 1){
+        cout<<"You"<<id<<" Rigested successfully";
+    }
+    else{
+        cout<<"Sorry Login Error";
+    }
 }
 void data(){
+    // create object file
     fstream myfile;
+    // open object file and read it 
     myfile.open("file.txt", ios::in);
+    // check is open or not
     if(myfile.is_open()){
-        // access line by line and storage into var type string
+        // any line stok as variable
         string line;
         while(getline(myfile, line)){
             cout<<line<<endl;
@@ -44,12 +57,13 @@ void data(){
     }   
 }
 int main(){
+    system("CLS");
     cout<<"******************************************************************************"<<endl;
-    cout<<"************************** LOGIN SIGN IN SYSTEM ******************************"<<endl;
+    cout<<"************************** LOGIN/SIGN IN SYSTEM ******************************"<<endl;
     cout<<"******************************************************************************"<<endl;
     cout<<endl<<endl<<endl;
-    cout<<"1. LOGIN"<<endl;
-    cout<<"2. REGISTER"<<endl;
+    cout<<"1. REGISTER"<<endl;
+    cout<<"2. LOGIN"<<endl;
     cout<<"3. SHOW DATA"<<endl;
     cout<<"4. EXIT"<<endl;
     cout<<endl<<endl;
@@ -58,12 +72,13 @@ int main(){
     cin>>choise;
     switch(choise){
         case 1:
-            login();
-            cout<<endl;
-            main();
-            break;
-        case 2:
             Register();
+            break;
+            main();
+
+            
+        case 2:
+            Login();
             break;
         case 3:
             data();
@@ -76,11 +91,3 @@ int main(){
             break;
     }
 }
-
-
-
-
-
-
-
-
